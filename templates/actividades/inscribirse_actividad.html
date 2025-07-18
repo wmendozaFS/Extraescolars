@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Inscribirse en {{ actividad.nombre }}{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h2 class="mb-0">Inscribirse en: {{ actividad.nombre }}</h2>
+            </div>
+            <div class="card-body">
+                <p><strong>Descripción:</strong> {{ actividad.descripcion }}</p>
+                <p><strong>Monitor:</strong> {{ actividad.monitor }}</p>
+                <p><strong>Plazas máximas:</strong> {{ actividad.plazas_maximas }}</p>
+                <p><strong>Plazas restantes:</strong> <span class="badge {% if actividad.plazas_restantes <= 5 %}bg-warning{% else %}bg-success{% endif %}">{{ actividad.plazas_restantes }}</span></p>
+                <p><strong>Fecha de inicio:</strong> {{ actividad.fecha_inicio|date:"d M Y" }}</p>
+
+                {% if actividad.plazas_restantes > 0 %}
+                    <form method="post" class="mt-4">
+                        {% csrf_token %}
+                        <div class="alert alert-info" role="alert">
+                            Estás a punto de inscribirte en **{{ actividad.nombre }}**.
+                            Por favor, confirma tu inscripción.
+                        </div>
+                        <button type="submit" class="btn btn-success btn-lg">Confirmar Inscripción</button>
+                        <a href="{% url 'lista_actividades' %}" class="btn btn-secondary btn-lg ms-2">Cancelar</a>
+                    </form>
+                {% else %}
+                    <div class="alert alert-danger mt-4" role="alert">
+                        ¡Lo sentimos! No quedan plazas disponibles para esta actividad.
+                    </div>
+                    <a href="{% url 'lista_actividades' %}" class="btn btn-secondary">Volver al listado</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

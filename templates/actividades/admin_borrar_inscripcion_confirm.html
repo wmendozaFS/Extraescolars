@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Confirmar Borrado de Inscripción{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm border-danger">
+            <div class="card-header bg-danger text-white">
+                <h2 class="mb-0">Confirmar Borrado de Inscripción</h2>
+            </div>
+            <div class="card-body">
+                <p class="lead">¿Estás seguro de que quieres borrar la inscripción de "<strong>{{ inscripcion.alumno.nombre_completo }}</strong>" en "<strong>{{ inscripcion.actividad.nombre }}</strong>"?</p>
+                <p class="text-danger">¡Esta acción es irreversible!</p>
+
+                <form method="post" class="mt-4">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger btn-lg me-2">Sí, Borrar Inscripción</button>
+                    <a href="{% url 'admin_lista_inscripciones' %}" class="btn btn-secondary btn-lg">Cancelar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Confirmar Borrado de Alumno{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm border-danger">
+            <div class="card-header bg-danger text-white">
+                <h2 class="mb-0">Confirmar Borrado de Alumno</h2>
+            </div>
+            <div class="card-body">
+                <p class="lead">¿Estás seguro de que quieres borrar al alumno "<strong>{{ alumno.nombre_completo }}</strong>" (Usuario: {{ alumno.usuario.username }})?</p>
+                <p class="text-danger">¡Esta acción es irreversible y eliminará también su cuenta de usuario y **todas sus inscripciones**!</p>
+
+                <form method="post" class="mt-4">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger btn-lg me-2">Sí, Borrar Alumno</button>
+                    <a href="{% url 'admin_lista_alumnos' %}" class="btn btn-secondary btn-lg">Cancelar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

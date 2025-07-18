@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}Gestionar Alumnos{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Gestionar Alumnos</h1>
+
+<a href="{% url 'admin_crear_alumno' %}" class="btn btn-primary mb-3">
+    <i class="bi bi-person-plus"></i> Crear Nuevo Alumno
+</a>
+<a href="{% url 'admin_dashboard' %}" class="btn btn-secondary mb-3 ms-2">
+    Volver al Dashboard
+</a>
+
+{% if alumnos %}
+    <div class="table-responsive">
+        <table class="table table-hover table-striped shadow-sm">
+            <thead class="table-dark">
+                <tr>
+                    <th>Nombre Completo</th>
+                    <th>Correo</th>
+                    <th>Curso</th>
+                    <th>Usuario</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for alumno in alumnos %}
+                <tr>
+                    <td>{{ alumno.nombre_completo }}</td>
+                    <td>{{ alumno.correo }}</td>
+                    <td>{{ alumno.curso }}</td>
+                    <td>{{ alumno.usuario.username }}</td>
+                    <td>
+                        <a href="{% url 'admin_editar_alumno' alumno.id %}" class="btn btn-sm btn-info me-2">Editar</a>
+                        <a href="{% url 'admin_borrar_alumno' alumno.id %}" class="btn btn-sm btn-danger">Borrar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% else %}
+    <div class="alert alert-info" role="alert">
+        No hay alumnos registrados.
+    </div>
+{% endif %}
+{% endblock %}

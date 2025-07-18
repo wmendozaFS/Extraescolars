@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Confirmar Borrado de Monitor{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm border-danger">
+            <div class="card-header bg-danger text-white">
+                <h2 class="mb-0">Confirmar Borrado de Monitor</h2>
+            </div>
+            <div class="card-body">
+                <p class="lead">¿Estás seguro de que quieres borrar el monitor "<strong>{{ monitor.username }}</strong>"?</p>
+                <p class="text-danger">¡Esta acción es irreversible y también eliminará las actividades asociadas a este monitor si Actividad.monitor fuera un ForeignKey!</p>
+                <p class="text-danger">Dado que el monitor es un CharField en Actividad, las actividades con este nombre de monitor NO se borrarán automáticamente, pero la relación de su cuenta de usuario sí se perderá.</p>
+
+                <form method="post" class="mt-4">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger btn-lg me-2">Sí, Borrar Monitor</button>
+                    <a href="{% url 'admin_lista_monitores' %}" class="btn btn-secondary btn-lg">Cancelar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

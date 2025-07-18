@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard Administrador{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Dashboard del Administrador</h1>
+
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mb-4"> {# Ajuste a 4 columnas #}
+    <div class="col">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-header">Total de Actividades</div>
+            <div class="card-body">
+                <h5 class="card-title">{{ total_actividades }}</h5>
+                <p class="card-text">Actividades extraescolares registradas.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card text-white bg-success mb-3">
+            <div class="card-header">Total de Alumnos</div>
+            <div class="card-body">
+                <h5 class="card-title">{{ total_alumnos }}</h5>
+                <p class="card-text">Alumnos registrados en la plataforma.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card text-white bg-info mb-3">
+            <div class="card-header">Total de Inscripciones</div>
+            <div class="card-body">
+                <h5 class="card-title">{{ total_inscripciones }}</h5>
+                <p class="card-text">Inscripciones realizadas a las actividades.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col"> {# Nuevo para monitores #}
+        <div class="card text-white bg-warning mb-3">
+            <div class="card-header">Total de Monitores</div>
+            <div class="card-body">
+                <h5 class="card-title">{{ total_monitores }}</h5>
+                <p class="card-text">Usuarios designados como monitores.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-header bg-secondary text-white">
+        <h4 class="mb-0">Gestión de la Aplicación</h4>
+    </div>
+    <div class="list-group list-group-flush">
+        <a href="{% url 'admin_lista_actividades' %}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+            Gestión de Actividades
+            <span class="badge bg-primary rounded-pill">{{ total_actividades }}</span>
+        </a>
+        <a href="{% url 'admin_lista_alumnos' %}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+            Gestión de Alumnos
+            <span class="badge bg-success rounded-pill">{{ total_alumnos }}</span>
+        </a>
+        <a href="{% url 'admin_lista_monitores' %}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+            Gestión de Monitores
+            <span class="badge bg-warning rounded-pill">{{ total_monitores }}</span>
+        </a>
+        <a href="{% url 'admin_lista_inscripciones' %}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+            Gestión de Inscripciones
+            <span class="badge bg-info rounded-pill">{{ total_inscripciones }}</span>
+        </a>
+        <a href="{% url 'admin:index' %}" class="list-group-item list-group-item-action">
+            Acceder al Panel de Administración de Django (más opciones avanzadas)
+        </a>
+    </div>
+</div>
+{% endblock %}
