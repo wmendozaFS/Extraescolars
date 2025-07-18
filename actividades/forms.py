@@ -36,7 +36,7 @@ class ActividadForm(forms.ModelForm):
         model = Actividad
         fields = ['nombre', 'descripcion', 'monitor', 'plazas_maximas', 'fecha_inicio']
         widgets = {
-            'fecha_inicio': forms.DateInput(attrs={'type': 'date'}), # Para un selector de fecha HTML5
+            'fecha_inicio': forms.DateInput(attrs={'type': 'date'}),
         }
         
 class AdminAlumnoForm(forms.ModelForm):
